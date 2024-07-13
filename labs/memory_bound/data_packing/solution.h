@@ -14,11 +14,11 @@ constexpr int maxRandom = 100;
 
 // FIXME: this data structure can be reduced in size
 struct S {
-  double d;
-  long long l;
-  int i;
-  short s;
-  bool b;
+  float d;
+  long long l:16;
+  int i:8;
+  short s:7;
+  bool b:1;
 
   bool operator<(const S &s) const { return this->i < s.i; }
 };
@@ -26,7 +26,12 @@ struct S {
 #ifdef CHECK_SIZE
 template<int N>
 class TD;
-TD<sizeof(S)> td;
+TD<sizeof(S)> td1; // S
+TD<sizeof(long long)> td1; // long long
+TD<sizeof(double)> td5; // double
+TD<sizeof(float)> td2; // float
+TD<sizeof(short)> td3; // short
+TD<sizeof(bool)> td4; // bool
 #endif
 
 void init(std::array<S, N> &arr);
