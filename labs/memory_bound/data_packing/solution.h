@@ -4,6 +4,9 @@
 
 #include <array>
 
+#define CHECK_SIZE
+#undef CHECK_SIZE
+
 // Assume those constants never change
 constexpr int N = 10000;
 constexpr int minRandom = 0;
@@ -19,6 +22,12 @@ struct S {
 
   bool operator<(const S &s) const { return this->i < s.i; }
 };
+
+#ifdef CHECK_SIZE
+template<int N>
+class TD;
+TD<sizeof(S)> td;
+#endif
 
 void init(std::array<S, N> &arr);
 S create_entry(int first_value, int second_value);
