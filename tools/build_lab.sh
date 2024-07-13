@@ -3,6 +3,7 @@ MODE="$1"
 if [ "$MODE" == "debug" ];
 then
 
+    echo "Debug mode is triggered"
     cmake -DCMAKE_BUILD_TYPE=Debug .. -DCMAKE_C_FLAGS="-g" -DCMAKE_CXX_FLAGS="-g"
     cmake --build . --config Debug --parallel 8
 
